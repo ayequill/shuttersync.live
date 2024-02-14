@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Album {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String    @unique
+  createdAt DateTime? @default(now())
+  photos    Photo[]
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String    @db.Uuid
+}
+
+model Photo {
+  id         String    @id @default(uuid()) @db.Uuid
+  imgUrl     String?
+  storageUrl String?
+  size       String?
+  createdAt  DateTime? @default(now())
+  album      Album     @relation(fields: [albumId], references: [id])
+  albumId    String    @db.Uuid
+}
+
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  albums        Album[]
+  createdAt     DateTime? @default(now())
+  email         String    @unique
+  name          String
+  password      String
+  verified      Boolean?  @default(false)
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id])
+  userId            String  @db.Uuid
+}
+
+model Session {
+  id           String   @id
+  sessionToken String   @unique
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String   @db.Uuid
+}
