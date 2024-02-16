@@ -31,6 +31,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const request = context.switchToHttp().getRequest();
 
     const token = this.extractTokenFromHeader(request);
+    if (!token) {
+      throw new UnauthorizedException('Invalid');
+    }
     try {
       this.jwtService.verifyAsync(token);
       return true;
