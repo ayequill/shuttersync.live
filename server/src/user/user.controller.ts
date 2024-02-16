@@ -2,8 +2,8 @@ import {Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationP
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import {User} from "@/user/user.interface";
 import { Public } from '@/auth/skip-auth'
+import { User } from '@prisma/client';
 
 @Controller('users')
 export class UserController {
@@ -17,7 +17,6 @@ export class UserController {
   }
 
   @Get()
-  @Public()
   findAll() {
     return this.userService.findAll();
   }
