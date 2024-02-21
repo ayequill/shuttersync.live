@@ -24,6 +24,7 @@ import { CloudinaryService } from '@/cloudinary/cloudinary.service';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { Express } from 'express';
 import { diskStorage } from 'multer';
+import { PrismaService } from '@/prisma/prisma.service';
 
 @Controller('albums')
 export class AlbumsController {
@@ -31,6 +32,7 @@ export class AlbumsController {
     private albumsService: AlbumsService,
     private photo: PhotosService,
     private cloud: CloudinaryService,
+    private prisma: PrismaService,
   ) {}
 
   @Get(':id')
@@ -83,7 +85,7 @@ export class AlbumsController {
 
   @Post(':id/photos')
   @UseInterceptors(
-    FilesInterceptor('files', 20, {
+    FilesInterceptor('photos', 20, {
       dest: 'public/photos',
       storage: diskStorage({
         destination: 'public/photos',
@@ -97,14 +99,21 @@ export class AlbumsController {
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Param('id') id: string,
   ) {
+    const album = await this.albumsService.findOne(id);
+    if (!album) {
+      throw new HttpException('Album not found', HttpStatus.NOT_FOUND);
+    }
+
     const cloudfiles = await this.cloud.uploadFiles(files, id);
     cloudfiles.forEach(async (file) => {
       await this.photo.create(id, file);
     })
-    
+
+    const newAlbum = await this.albumsService.findOne(id);
     return {
       message: 'Photos uploaded successfully',
       status: HttpStatus.OK,
+      data: newAlbum,
     };
   }
 }

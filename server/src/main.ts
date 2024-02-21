@@ -13,14 +13,17 @@ async function bootstrap() {
         .addTag('shuttersync')
         .build();
      
-    app.enableCors();
+    app.enableCors({
+      origin: ['http://localhost:3000'],
+      credentials: true,
+    });
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
-    app.use(cookieParser(process.env.JWT_SECRET));
+    app.use(cookieParser());
 
 
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT ?? 8080);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

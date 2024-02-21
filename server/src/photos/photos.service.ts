@@ -8,6 +8,8 @@ import { CloudinaryResponse } from '@/cloudinary/cloudinary-response';
 @Injectable()
 export class PhotosService {
   constructor(private readonly prisma: PrismaService) {}
+
+
   async create(albumId: string, data: CloudinaryResponse): Promise<Photo> {
     const photo = await this.prisma.photo.create({
       data: {
@@ -26,6 +28,18 @@ export class PhotosService {
     return photo;
   }
 
+  // async createOne(data: CloudinaryResponse): Promise<Photo> {
+  //   const photo = await this.prisma.photo.create({
+  //     data: {
+  //       imgUrl: data.secure_url,
+  //       size: data.bytes.toString(),
+  //       publicId: data.public_id,
+  //       storageUrl: data.secure_url,
+  //       name: data.original_filename,
+  //     }
+  //   });
+  //   return photo;
+  // }
   findAll() {
     return `This action returns all photos`;
   }
