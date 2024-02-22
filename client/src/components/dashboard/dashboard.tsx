@@ -10,17 +10,6 @@ import EmptyAlbums from '@/components/dashboard/empty-collections';
 import Albums from '@/components/dashboard/albums';
 
 
-// export const metadata: Metadata = {
-//   title: 'Dashboard',
-//   description: 'Dashboard page',
-//   // tags: ['nextjs', 'react', 'typescript'],
-//   // slug: 'dashboard'
-//   keywords: 'dashboard, albums, photos',
-//   robots: 'noindex, nofollow',
-// };
-
-// export { metadata };
-
 export default function DashBoard({}) {
   const { user } = useUser();
 
