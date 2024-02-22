@@ -2,7 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github"
 import { login } from '@/lib/api/auth.helper'
-import { User } from '@/lib/interfaces/User'
+import { User } from '@/lib/interfaces/interfaces'
 
 export const authOptions : AuthOptions = {
     session: {
@@ -12,7 +12,7 @@ export const authOptions : AuthOptions = {
         secret: process.env.JWT_SECRET
     },
     pages: {
-        signIn: '/',
+        signIn: '/signin',
         signOut: '/logout',
         error: '/',
     },
@@ -48,7 +48,7 @@ export const authOptions : AuthOptions = {
     //     clientSecret: process.env.GITHUB_SECRET as string,
     // })
 ],
-    
+
 
     callbacks: {
         async session({ session, token }) {
