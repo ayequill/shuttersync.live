@@ -53,6 +53,9 @@ export class UserAlbumsService {
       include: {
         photos: true,
       },
+      orderBy: {
+        updatedAt: 'desc',
+      }
     });
   }
 
