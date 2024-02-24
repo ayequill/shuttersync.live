@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -12,25 +11,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { login } from '@/lib/api/auth.helper';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { login } from '@/lib/api/auth.helper';
-import { signIn } from 'next-auth/react';
-import { useSession } from 'next-auth/react';
 
-import { CopyIcon } from '@radix-ui/react-icons';
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 
 
 const formSchema = z.object({
