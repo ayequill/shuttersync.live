@@ -1,13 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { fetchAlbums } from '@/lib/api/albums.helper';
-import { useUser } from '@/contexts/user-context';
-import { useQuery } from '@tanstack/react-query';
+import Albums from '@/components/dashboard/albums';
 import AlbumToolBar from '@/components/dashboard/albumtoolbar';
 import EmptyAlbums from '@/components/dashboard/empty-collections';
-import Albums from '@/components/dashboard/albums';
+import { useUser } from '@/contexts/user-context';
+import { fetchAlbums } from '@/lib/api/albums.helper';
+import { useQuery } from '@tanstack/react-query';
 
 
 export default function DashBoard({}) {

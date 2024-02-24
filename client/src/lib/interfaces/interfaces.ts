@@ -20,6 +20,7 @@ export interface Album {
     photos: Photo[];
     published: boolean;
     locked: boolean;
+    description: string;
 }
 
 export interface Photo {

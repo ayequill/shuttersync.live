@@ -1,12 +1,11 @@
 // "use client"
 
 import Image from 'next/image';
-import MobileInHand from '../../public/mobile-in-hand.webp';
-import Flow from '../../public/flow.webp';
 import Customer from '../../public/customer1.webp';
+import Flow from '../../public/flow.webp';
+import MobileInHand from '../../public/mobile-in-hand.webp';
 
-import SignUp from '@/components/signup-form';
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default async function HomePage() {

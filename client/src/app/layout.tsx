@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-// import { Inter } from 'next/font/google';
+import { Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -9,7 +9,7 @@ import QueryProvider from '@/components/QueryProvider';
 import { getServerSession } from 'next-auth';
 import ThemeToggle from '@/components/theme-toggle';
 import { authOptions } from './api/auth/[...nextauth]/options';
-// const inter = Inter({ subsets: ['latin'] });
+const sans = Source_Sans_3({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'ShutterSync - Home',
@@ -25,17 +25,16 @@ export default function RootLayout({
   const session = getServerSession(authOptions);
   return (
     <html lang="en">
-      <head>
+      {/* <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={metadata.description as string} />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        {/* <link rel="manifest" href="/site.webmanifest" /> */}
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
-        <link href="https://fonts.cdnfonts.com/css/gelion" rel="stylesheet" />
-      </head>
-      <body className="{inter.className}">
+      </head> */}
+      <body className={sans.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

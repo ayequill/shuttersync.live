@@ -53,7 +53,7 @@ export const createAlbum = async (id: string, token: string, files: File[]): Pro
     }
 }
 
-export const createAlbumName = async (userId: string, token: string, albumName: string): Promise<Album | unknown> => {
+export const createAlbumName = async (userId: string, token: string, albumName: string): Promise<Album> => {
     try {
         const response = await axios.post(`http://localhost:5000/users/${userId}/albums`, {name: albumName}, {
             headers: {
@@ -63,7 +63,7 @@ export const createAlbumName = async (userId: string, token: string, albumName: 
         return response.data;
     } catch (error) {
         console.error(error);
-        return error;
+        return {} as Album;
     }
 }
 

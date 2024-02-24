@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useUser } from '@/contexts/user-context';
 import { FaTimes } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { Album } from '@/lib/interfaces/interfaces';
 export default function Page() {
     const router = useRouter();
   const [selected, setSelected] = React.useState<File[]>([]);

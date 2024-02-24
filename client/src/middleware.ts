@@ -15,9 +15,6 @@ export default withAuth({
       // return true;
       return token ? true : false;
     },
-    redirect: async({token}) => {
-      return '/login';
-    }
     // redirect: async ({ req, res, token }) => {
     //   if (!token) {
     //     res.writeHead(302, { Location: '/login' });
