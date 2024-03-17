@@ -8,6 +8,7 @@ use App\Http\Resources\AlbumCollection;
 use App\Models\Album as AlbumModel;
 use App\Http\Resources\Album;
 use http\Client\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 
@@ -16,21 +17,26 @@ class AlbumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): AlbumCollection
+    public function index(Request $request): AlbumCollection
     {
-        $values = Cache::remember('albums', 100000, function () {
+        if ($request->query('photos')) {
+            return new AlbumCollection(AlbumModel::paginate()->load('photos'));
+        }
+
+        return Cache::remember('all_albums', now()->addSeconds(60), function () {
             return new AlbumCollection(AlbumModel::paginate());
         });
-        return $values;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(AlbumModel $album): Album
+    public function show(Request $request, AlbumModel $album): Album
     {
-//        return new Album($album);
+        if ($request->query('photos')) {
         return new Album($album->load('photos'));
+        }
+        return new Album($album);
     }
 
     /**

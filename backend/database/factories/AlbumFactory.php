@@ -23,13 +23,6 @@ class AlbumFactory extends Factory
             'title' => fake()->text(10),
             'description' => fake()->text,
             'published' => fake()->randomElement(['true', 'false'])
-//            'user' => User::factory(),
-//            'photos' => Photo::factory()
         ];
     }
-
-//    public function configure()
-//    {
-//        return $this->has(Photo::factory(10));
-//    }
 }

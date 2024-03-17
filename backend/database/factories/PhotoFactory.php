@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Album;
+use App\Models\Photo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Photo>
+ * @extends Factory<Photo>
  */
 class PhotoFactory extends Factory
 {
@@ -20,7 +21,7 @@ class PhotoFactory extends Factory
         return [
             'file_path' => $this->faker->filePath(),
             'img_url' => $this->faker->imageUrl,
-            'size' => $this->faker->numberBetween([200, 2000]),
+            'size' => $this->faker->randomNumber(7),
         ];
     }
 }

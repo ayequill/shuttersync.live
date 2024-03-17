@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Number;
 
 class PhotoResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class PhotoResource extends JsonResource
             'id' => $this->id,
             'albumId' => $this->album_id,
             'url' => $this->img_url,
-            'size' => $this->size,
+            'size' => Number::fileSize($this->size),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

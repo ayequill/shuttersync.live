@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@test.com',
             'role' => 'admin'
         ]);
-        Album::factory(100)->has(Photo::factory(3))->for($user)->create();
+        Album::factory(10)->has(Photo::factory(3))->for($user)->create();
 
 
 //        User::factory(2)->has(Album::factory()->count(3))->create();
