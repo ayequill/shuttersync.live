@@ -26,10 +26,11 @@ class DatabaseSeeder extends Seeder
 
         $admin = User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@test.com',
+            'email' => 'siaw@email.com',
+            'password' => 'password',
             'role' => 'admin'
         ]);
-        Album::factory(10)->has(Photo::factory(3))->for($user)->create();
+        Album::factory(10)->has(Photo::factory(3))->for($admin)->create();
 
 
 //        User::factory(2)->has(Album::factory()->count(3))->create();
