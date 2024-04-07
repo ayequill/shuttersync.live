@@ -19,6 +19,7 @@ class PhotoResource extends JsonResource
             'id' => $this->id,
             'albumId' => $this->album_id,
             'url' => $this->img_url,
+            'filePath' => $this->file_path,
             'size' => Number::fileSize($this->size),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,

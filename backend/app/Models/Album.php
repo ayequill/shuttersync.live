@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Album extends Model
 {
@@ -24,6 +25,15 @@ class Album extends Model
         'password',
         'published'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($album) {
+            $album->slug = $album->slug ?: Str::slug($album->title);
+        });
+    }
 
     public function photos(): HasMany
     {
