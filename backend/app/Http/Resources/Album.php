@@ -19,10 +19,10 @@ class Album extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'userId' => $this->user_id,
             'published' => $this->published,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
+            'slug' => $this->slug,
             'photos' => PhotoResource::collection($this->whenLoaded('photos')),
             'cover' => PhotoResource::make($this->photos->first())
         ];
