@@ -11,12 +11,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { register } from '@/lib/api/auth.helper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useAuth } from '@/hooks/auth'
 
 import Link from "next/link";
+import { useState } from 'react';
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -43,6 +44,12 @@ export default function SignUp() {
     },
   });
 
+  const [error, setErrors] = useState(null);
+
+  const { register } = useAuth(
+    { middleware: 'guest', redirectIfAuthenticated: '/dashboard' }
+  );
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (values.password !== values.confirmPassword) {
       form.setError('confirmPassword', {
@@ -51,16 +58,23 @@ export default function SignUp() {
       });
       return;
     }
-    const res = await register({
+    try {
+    await register({
       email: values.email,
       password: values.password,
+      password_confirmation: values.confirmPassword,
       name: values.name,
+      setErrors
     });
-    if (res) {
-      console.log(res);
+    } catch (error) {
+      form.setError('email', {
+        type: 'manual',
+        message: 'Email is already in use.',
+      });
+      }
     }
-  }
 
+      console.log(error)
   return (
         <div className="px-6 py-20 lg:px-6">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -95,11 +109,11 @@ export default function SignUp() {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="">
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Full name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Name" {...field} />
+                        <Input placeholder="Full name" {...field} />
                       </FormControl>
-                      <FormDescription>Please enter your name.</FormDescription>
+                      <FormDescription>Please enter your full name.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}

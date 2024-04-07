@@ -11,11 +11,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { login } from '@/lib/api/auth.helper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useAuth } from '@/hooks/auth';
 
 
 
@@ -39,6 +39,10 @@ export default function SignIn() {
     },
   });
 
+  const {login} = useAuth({
+    middleware: 'guest'
+  })
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await login({ email: values.email, password: values.password });
     const res = await signIn('credentials', {
@@ -48,9 +52,7 @@ export default function SignIn() {
       callbackUrl: '/dashboard',
     })
 
-    if (res) {
-      console.log(res);
-    }
+    console.log(res)
   }
 
   return (
