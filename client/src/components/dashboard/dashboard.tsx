@@ -3,27 +3,29 @@
 import Albums from '@/components/dashboard/albums';
 import AlbumToolBar from '@/components/dashboard/albumtoolbar';
 import EmptyAlbums from '@/components/dashboard/empty-collections';
-import { useUser } from '@/contexts/user-context';
-import { fetchAlbums } from '@/lib/api/albums.helper';
-import { useQuery } from '@tanstack/react-query';
+import useSWR from 'swr';
+import { useAuth } from '@/hooks/auth';
+import { Album } from '@/lib/types/Album';
+import { useFetcher } from '@/hooks/useFetcher';
 
 
 export default function DashBoard({}) {
-  const { user } = useUser();
 
-  const { data, status } = useQuery({
-    queryKey: ['albums'],
-    queryFn: async () =>
-      await fetchAlbums(user.id, user?.access_token as string),
-    enabled: !!user?.id,
-    refetchOnWindowFocus: false,
-  });
+  const {user} = useAuth();
+  const {getUserAlbums} = useFetcher()
+
+
+const {data, error} = useSWR<Album[]>(user?.id && 'allAlbums', getUserAlbums)
+
+  console.log(data)
+  console.log(error)
+
 
   return (
     <div>
       <AlbumToolBar />
-      {status === 'success' && !data?.length && <EmptyAlbums />}
-      {status === 'success' && data?.length && <Albums albums={data} />}
+      {!data?.length && <EmptyAlbums />}
+      {data?.length && <Albums albums={data} />}
     </div>
   );
 }
