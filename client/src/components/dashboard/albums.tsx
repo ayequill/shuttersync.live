@@ -1,6 +1,6 @@
 import React from "react";
 import AlbumCard from "./albumcard";
-import { Album } from '@/lib/interfaces/interfaces';
+import { Album } from '@/lib/types/Album';
 
 
 export default function Albums({ albums }: { albums: Album[] }) {
