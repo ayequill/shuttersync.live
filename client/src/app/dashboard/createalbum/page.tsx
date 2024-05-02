@@ -60,8 +60,8 @@ export default function Page() {
   };
 
   return (
-    <main className='flex flex-col justify-center items-center'>
-    <div className=" max-w-[320px] lg:max-w-[520px] space-y-[2rem]">
+    <section className='flex flex-col justify-center items-center'>
+    <div className=" max-w-[320px] md:max-w-[520px] space-y-[2rem]">
       <h1 className="font-medium py-2">Create Album</h1>
       {/* <InputText /> */}
       <div className="grid max-w-sm items-center gap-1.5">
@@ -91,7 +91,7 @@ export default function Page() {
         </button>
       </div>
     </div>
-    </main>
+    </section>
   );
 }
 
@@ -117,7 +117,7 @@ const SelectedPhotos = ({
             }
           />
           <Image
-            className="rounded-md"
+            className="rounded-md w-[80px] h-[80px] object-cover"
             src={URL.createObjectURL(file)}
             alt={file.name}
             width={80}

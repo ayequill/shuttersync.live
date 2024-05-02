@@ -28,7 +28,7 @@ export class PhotosService {
     return photo;
   }
 
-  // async createOne(data: CloudinaryResponse): Promise<Photo> {
+  // async createOne(data: CloudinaryResponse): Promise<PhotoResource> {
   //   const photo = await this.prisma.photo.create({
   //     data: {
   //       imgUrl: data.secure_url,

@@ -2,7 +2,7 @@ import AlbumView from "@/components/dashboard/album-view";
 import {Suspense} from "react";
 
 
-export default function Page({params}: { params: { id: string } }) {
+export default async function Page({params}: { params: { id: string } }) {
 
 
     return (

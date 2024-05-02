@@ -1,8 +1,8 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { UpdateAlbumDto } from './dto/update-album.dto';
-import { PrismaService } from '../prisma/prisma.service';
-import { Album } from '@prisma/client';
 import { CloudinaryService } from '@/cloudinary/cloudinary.service';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Album } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
+import { UpdateAlbumDto } from './dto/update-album.dto';
 
 @Injectable()
 export class AlbumsService {

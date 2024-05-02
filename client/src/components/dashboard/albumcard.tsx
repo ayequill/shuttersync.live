@@ -5,10 +5,7 @@ import { Badge } from '@/components/ui/badge';
 
 import AlbumOptions from '@/components/dashboard/album-options'
 
-function AlbumCard({ album }: { album: Album }) {
-  const datePublished = album?.createdAt
-    ? new Date(album.createdAt).toLocaleDateString()
-    : '';
+async function AlbumCard({ album }: { album: Album }) {
 
   return (
     <div className="flex flex-col rounded-3xl dark:bg-[#0b1523] border sm:max- shadow-lg">
@@ -29,10 +26,10 @@ function AlbumCard({ album }: { album: Album }) {
           <AlbumOptions id={album.id} />
         </div>
       </div>
-      <div className="flex justify-between items-center px-3 py-3">
+      <div className="flex justify-between items-center px-3 py-4">
         <div className="">
         <h3 className="font-medium">{album.title}</h3>
-        <p className="font-medium mt-">Created on {datePublished}</p>
+        <p className="font-medium mt- text-gray-500 text-sm">{album.createdAt}</p>
         </div>
         {album.published ? (
           <Badge variant="outline">Published</Badge>

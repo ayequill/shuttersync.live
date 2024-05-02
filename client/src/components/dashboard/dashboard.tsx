@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { useAuth } from '@/hooks/auth';
 import { Album } from '@/lib/types/Album';
 import { useFetcher } from '@/hooks/useFetcher';
+import Loading from '@/app/dashboard/album/[id]/loading';
 
 
 export default function DashBoard({}) {
@@ -15,16 +16,13 @@ export default function DashBoard({}) {
   const {getUserAlbums} = useFetcher()
 
 
-const {data, error} = useSWR<Album[]>(user?.id && 'allAlbums', getUserAlbums)
+const {data, error, isLoading} = useSWR<Album[]>(user?.id && 'allAlbums', getUserAlbums)
 
-  console.log(data)
-  console.log(error)
-
-
-  return (
+  return isLoading ? <Loading /> : (
     <div>
-      <AlbumToolBar />
-      {!data?.length && <EmptyAlbums />}
+      {/*{isLoading && <Loading />}*/}
+      {data && <AlbumToolBar />}
+      {data &&  !data?.length && <EmptyAlbums />}
       {data?.length && <Albums albums={data} />}
     </div>
   );

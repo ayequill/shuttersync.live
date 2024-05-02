@@ -1,4 +1,5 @@
-import axios, { Axios, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import axios from '@/lib/axios';
 import { Album } from "@/lib/interfaces/interfaces";
 
 
@@ -23,11 +24,12 @@ import { Album } from "@/lib/interfaces/interfaces";
 
 export const fetchAlbums = async (userId: string, token: string): Promise<Album[]> => {
     try {
-        const response = await axios.get(`http://localhost:5000/users/${userId}/albums`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
+        const response = await axios.get(`/api/v1/users/${userId}/albums?photos=true`, {
+            // headers: {
+            //     Authorization: `Bearer ${token}`,
+            // }
         });
+        console.log(response)
         return response.data;
     } catch (error) {
         console.error(error);

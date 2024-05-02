@@ -20,7 +20,7 @@ class PhotoFactory extends Factory
     {
         return [
             'file_path' => $this->faker->filePath(),
-            'img_url' => $this->faker->imageUrl,
+            'img_url' => 'https://source.unsplash.com/random/?woman',
             'size' => $this->faker->randomNumber(7),
         ];
     }

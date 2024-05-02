@@ -12,6 +12,7 @@ import {
   ResendEmailVerification,
 } from '@/lib/types/Auth';
 import { User } from '@/lib/types/User';
+import {signOut} from 'next-auth/react'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthOpts = {}) => {
   const router = useRouter();
@@ -108,8 +109,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthOpts = {}) 
     if (!error) {
       await axios.post('/logout').then(() => mutate());
     }
-
-    window.location.pathname = '/login';
   };
 
   useEffect(() => {
@@ -120,7 +119,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthOpts = {}) 
       user?.emailVerifiedAt
     )
       router.push(redirectIfAuthenticated as string);
-    if (middleware === 'auth' && error) logout();
+    if (middleware === 'auth' && error) logout().then(r => signOut());
   }, [user, error]);
 
   return {

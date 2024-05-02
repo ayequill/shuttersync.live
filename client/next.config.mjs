@@ -21,7 +21,7 @@ const nextConfig = {
                 protocol: 'https',
             },
             {
-                hostname: 'via.placeholder.com',
+                hostname: 'source.unsplash.com',
                 protocol: 'https',
             },
         ]

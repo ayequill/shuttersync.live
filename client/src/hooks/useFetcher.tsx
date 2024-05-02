@@ -3,7 +3,9 @@ import { useAuth } from '@/hooks/auth';
 import { Album } from '@/lib/types/Album';
 
 export const useFetcher = () => {
-  const {csrf, user} = useAuth();
+  const {csrf, user} = useAuth({
+    middleware: 'auth',
+  });
 
 
   const getUserAlbums = async (): Promise<Album[]> => {
@@ -29,5 +31,7 @@ export const useFetcher = () => {
       throw error;
     }
   }
+
+
   return {getUserAlbums, createAlbum}
 }

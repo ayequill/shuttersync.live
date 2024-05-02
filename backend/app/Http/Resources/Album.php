@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,7 +21,7 @@ class Album extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'published' => $this->published,
-            'createdAt' => $this->created_at,
+            'createdAt' => Carbon::parse($this->created_at)->diffForHumans(),
             'updatedAt' => $this->updated_at,
             'slug' => $this->slug,
             'photos' => PhotoResource::collection($this->whenLoaded('photos')),
