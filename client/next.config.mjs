@@ -24,7 +24,8 @@ const nextConfig = {
                 hostname: 'via.placeholder.com',
                 protocol: 'https',
             },
-        ]
+        ],
+        dangerouslyAllowSVG: true,
     },
     // async headers() {
     //     return [
