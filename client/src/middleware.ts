@@ -6,22 +6,22 @@ const secret = process.env.NEXTAUTH_SECRET;
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret });
   console.log(token);
-  if (
-    token &&
-    (req.nextUrl.pathname === '/signin' ||
-      req.nextUrl.pathname === '/signup' ||
-      req.nextUrl.pathname === '/')
-  ) {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
-  }
-  if (
-    !token &&
-    req.nextUrl.pathname !== '/signin' &&
-    req.nextUrl.pathname !== '/signup' &&
-    req.nextUrl.pathname !== '/'
-  ) {
-    return NextResponse.redirect(new URL('/signin', req.url));
-  }
+  // if (
+  //   token &&
+  //   (req.nextUrl.pathname === '/signin' ||
+  //     req.nextUrl.pathname === '/signup' ||
+  //     req.nextUrl.pathname === '/')
+  // ) {
+  //   return NextResponse.redirect(new URL('/dashboard', req.url));
+  // }
+  // if (
+  //   !token &&
+  //   req.nextUrl.pathname !== '/signin' &&
+  //   req.nextUrl.pathname !== '/signup' &&
+  //   req.nextUrl.pathname !== '/'
+  // ) {
+  //   return NextResponse.redirect(new URL('/signin', req.url));
+  // }
 
   return NextResponse.next();
 }
