@@ -5,7 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Res,
-  Req
+  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
@@ -22,10 +22,10 @@ export class AuthController {
   async signIn(
     @Body() signInDto: SignInDto,
     @Res({ passthrough: true }) res: Response,
-    @Req() req: Request
+    @Req() req: Request,
   ) {
     const token = await this.authService.login(signInDto);
-    
+
     if (!token?.access_token) {
       return { message: 'Invalid credentials' };
     }

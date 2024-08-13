@@ -31,10 +31,9 @@ export class PhotosController {
   photo: any;
   constructor(private readonly photosService: PhotosService) {}
 
-
-@Post(':id/photo')
-@UseInterceptors(
-FileInterceptor('file', {
+  @Post(':id/photo')
+  @UseInterceptors(
+    FileInterceptor('file', {
       dest: 'public/photos',
       storage: diskStorage({
         destination: 'public/photos',
@@ -59,7 +58,6 @@ FileInterceptor('file', {
     file: Express.Multer.File,
     @Param('id') id: string,
   ) {
-
     const cloudFile = await this.cloud.upload(file, id);
     return this.photo.create(id);
   }
@@ -99,4 +97,3 @@ FileInterceptor('file', {
 // function diskStorage(arg0: { destination: string; filename: (req: any, file: any, cb: any) => void; }) {
 //   throw new Error('Function not implemented.');
 // }
-

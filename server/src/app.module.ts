@@ -7,14 +7,24 @@ import { JwtAuthGuard } from './auth/jwt.auth-guard';
 import { AlbumsModule } from './albums/albums.module';
 import { PhotosModule } from './photos/photos.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { AppController } from '@/app.controller';
 
 @Module({
-  imports: [UserModule, AuthModule, AlbumsModule, PhotosModule, CloudinaryModule],
-  controllers: [],
-  providers: [PrismaService, {
-    provide: APP_GUARD,
-    useClass: JwtAuthGuard
-  }],
+  imports: [
+    UserModule,
+    AuthModule,
+    AlbumsModule,
+    PhotosModule,
+    CloudinaryModule,
+  ],
+  controllers: [AppController],
+  providers: [
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
   exports: [PrismaService],
 })
 export class AppModule {}
